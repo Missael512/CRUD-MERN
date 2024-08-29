@@ -1,36 +1,32 @@
 import React from "react";
-import { useState} from "react";
+import { useState } from "react";
 import { Table, Container, Button, Tab } from "react-bootstrap";
 import axios from "axios";
-export const EditTask = ({ id, dbinfo, setShowEditTask,showinfo }) => {
-
+export const EditTask = ({ id, dbinfo, setShowEditTask, showinfo }) => {
   const [editTask, setEditTask] = useState("");
   const [dueEdit, setdueEdit] = useState("");
   const [importanceEdit, setimportanceEdit] = useState("Low");
 
-
-
-
-  const documentData = dbinfo.find(doc => doc._id === id);
+  const documentData = dbinfo.find((doc) => doc._id === id);
 
   if (!documentData) {
     return <div>Document not found</div>;
   }
-  const handleSendInfotoEdit = async()=>{
+  const handleSendInfotoEdit = async () => {
     try {
-        const response = await axios.put(`http://localhost:3030/edit/${id}`, {
-          task: editTask,
-          due: dueEdit,
-          importance: importanceEdit,
-        });
-  
-        console.log('Task updated successfully:', response.data);
-        showinfo()
-        setShowEditTask(false)
-      } catch (error) {
-        console.error('Error updating task:', error);
-      }
-  }
+      const response = await axios.put(`http://localhost:3030/edit/${id}`, {
+        task: editTask,
+        due: dueEdit,
+        importance: importanceEdit,
+      });
+
+      console.log("Task updated successfully:", response.data);
+      showinfo();
+      setShowEditTask(false);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
   return (
     <Container>
       <Table striped bordered hover responsive>
@@ -58,9 +54,12 @@ export const EditTask = ({ id, dbinfo, setShowEditTask,showinfo }) => {
               />
             </td>
             <td>
-              <input type="date" onChange={(e) => {
+              <input
+                type="date"
+                onChange={(e) => {
                   setdueEdit(e.target.value);
-                }}/>
+                }}
+              />
             </td>
             <td>
               <select

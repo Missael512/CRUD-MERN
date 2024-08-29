@@ -1,0 +1,15 @@
+.importance {
+  font-weight: bold;
+}
+
+.low {
+  color: green !important;
+}
+
+.medium {
+  color: #e6b800 !important;
+}
+
+.high{
+    color:#f74712 !important;
+}

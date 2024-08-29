@@ -112,7 +112,7 @@ export const ListTasks = () => {
               <tr key={index}>
                 <td>{item.task}</td>
                 <td>{item.due}</td>
-                <td>{item.importance}</td>
+                <td className={`importance ${item.importance === "Low" ? "low" : item.importance === "Medium" ? "medium" : "high"}`}>{item.importance}</td>
                 <td>{item.published}</td>
                 <td>
                   <Button
