@@ -42,6 +42,12 @@ app.get("/", (req, res) => {
 });
 
 //Add
+const formatDate = (date) => {
+  const offset = -6; // Ajuste para UTC-6
+  const localDate = new Date(date.getTime() + offset * 60 * 60 * 1000);
+
+  return localDate.toISOString().replace('T', ' ').substring(0, 19);
+};
 
 app.post("/add", (req, res) => {
   const { task, due, importance } = req.body;
@@ -49,10 +55,8 @@ app.post("/add", (req, res) => {
     task,
     due,
     importance,
-    published: moment(new Date())
-      .tz("America/Mexico_City")
-      .format("YYYY-MM-DD HH:mm:ss"),
-  });
+    published:formatDate(new Date())
+  })
   res.status(200).send("Ok");
 });
 
