@@ -1,5 +1,6 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState} from "react";
+import { Table, Container, Button, Tab } from "react-bootstrap";
 import axios from "axios";
 export const EditTask = ({ id, dbinfo, setShowEditTask,showinfo }) => {
 
@@ -31,8 +32,8 @@ export const EditTask = ({ id, dbinfo, setShowEditTask,showinfo }) => {
       }
   }
   return (
-    <>
-      <table border={"solid"}>
+    <Container>
+      <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr>
             <th scope="col">Task</th>
@@ -77,8 +78,8 @@ export const EditTask = ({ id, dbinfo, setShowEditTask,showinfo }) => {
             </td>
           </tr>
         </tbody>
-      </table>
-      <button onClick={handleSendInfotoEdit}>Edit!</button>
-    </>
+      </Table>
+      <Button onClick={handleSendInfotoEdit}>Edit!</Button>
+    </Container>
   );
 };

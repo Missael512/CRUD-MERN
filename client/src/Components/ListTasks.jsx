@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-
+import "../css/ListTask.css";
 import axios from "axios";
 import { EditTask } from "./EditTask";
-
+import { Table, Container, Button } from "react-bootstrap";
 export const ListTasks = () => {
   const [taskdata, setaskdata] = useState([]);
-
   const [showEditTask, setShowEditTask] = useState(false);
   const [id, setid] = useState("");
   const Trashicon = () => {
@@ -88,10 +87,18 @@ export const ListTasks = () => {
 
   return (
     <>
-      <div className="table-responsive">
-        <table className="table table-striped table-hover" border={"solid"}>
-          <thead className="thead-dark">
-            <tr>
+    {showEditTask && (
+        <EditTask
+          id={id}
+          dbinfo={taskdata}
+          setShowEditTask={setShowEditTask}
+          showinfo={handleGetinfo}
+        />
+      )}
+      <Container>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr style={{ backgroundColor: "#343a40", color: "white" }}>
               <th scope="col">Task</th>
               <th scope="col">Due</th>
               <th scope="col">Importance</th>
@@ -108,30 +115,31 @@ export const ListTasks = () => {
                 <td>{item.importance}</td>
                 <td>{item.published}</td>
                 <td>
-                  <button
+                  <Button
+                    variant="secondary"
                     onClick={() => {
                       handleDeleteOne(item._id);
                     }}
                   >
                     <Trashicon />
-                  </button>
+                  </Button>
                 </td>
                 <td>
-                  <button
+                  <Button
+                    variant="secondary"
                     onClick={() => {
                       handleButtonClick(item._id);
                     }}
                   >
                     <Editicon />
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
-
-        {showEditTask && <EditTask id={id} dbinfo={taskdata}  setShowEditTask={ setShowEditTask} showinfo={handleGetinfo}/>}
-      </div>
+        </Table>
+      </Container>
+      
     </>
   );
 };
